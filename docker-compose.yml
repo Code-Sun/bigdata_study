@@ -1,0 +1,32 @@
+version: "3"
+services:
+  doris-fe:
+    image: apache/doris:2.1.7-fe
+    container_name: doris-fe
+    hostname: doris-fe
+    ports:
+      - "8030:8030"
+      - "9030:9030"
+    environment:
+      - FE_SERVERS=fe1:doris-fe:9010
+      - FE_ID=1
+    volumes:
+      - doris-fe-data:/opt/apache-doris/fe/doris-meta
+
+  doris-be:
+    image: apache/doris:2.1.7-be
+    container_name: doris-be
+    hostname: doris-be
+    ports:
+      - "8040:8040"
+    environment:
+      - FE_SERVERS=fe1:doris-fe:9010
+      - BE_ADDR=doris-be:9050
+    depends_on:
+      - doris-fe
+    volumes:
+      - doris-be-data:/opt/apache-doris/be/storage
+
+volumes:
+  doris-fe-data:
+  doris-be-data:
