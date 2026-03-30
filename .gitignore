@@ -1,0 +1,24 @@
+# 编译产物
+target/
+build/
+dist/
+*.class
+*.jar
+*.war
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.project
+.classpath
+.settings/
+
+# macOS
+.DS_Store
+
+# 日志
+*.log
+
+# 环境配置
+.env
